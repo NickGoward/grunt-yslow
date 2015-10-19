@@ -86,7 +86,7 @@ module.exports = function(grunt) {
           cmd = 'phantomjs';
         }
       }
-      
+
       // creates a seperate scope for child variable
       cmd += ' node_modules/grunt-yslow/tasks/lib/yslow.js --info basic';
 
@@ -123,16 +123,14 @@ module.exports = function(grunt) {
 
           grunt.log.ok('\n');
 
-          if (str.match(/\[FAIL\]/g)) {
+          var success = str.match(/\[FAIL\]/g);
+          if (success) {
 
             grunt.log.error('\n\n-----------------------------------------------' +
               '\nTest ' + (i+1) + ': ' + urls[i].src + ' \t  FAILED' +
             '\n-----------------------------------------------\n\n');
 
             grunt.log.error(str);
-
-            done(false);
-
           } else {
             grunt.log.ok('\n\n-----------------------------------------------' +
               '\nTest ' + (i+1) + ': ' + urls[i].src +
@@ -140,11 +138,10 @@ module.exports = function(grunt) {
 
             grunt.log.ok(str);
           }
-          testsRun++;
-          if (testsRun >= testCount) {
-            done();
-          }
 
+          if ((++testsRun) >= testCount) {
+            done(success);
+          }
       });
     };
 
