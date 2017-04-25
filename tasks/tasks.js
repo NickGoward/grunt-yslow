@@ -87,8 +87,9 @@ module.exports = function(grunt) {
         }
       }
       
+      var phantomjsOptions = fetchOption('phantomjs', 'options', data, options);
       // creates a seperate scope for child variable
-      cmd += ' node_modules/grunt-yslow/tasks/lib/yslow.js --info basic';
+      cmd += ' ' + phantomjsOptions + ' node_modules/grunt-yslow/tasks/lib/yslow.js --info basic';
 
       // Add any custom parameters
       var userAgent = fetchOption('yslowOptions', 'userAgent', data, options);
