@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 
       try {
         // Look up first
-        phantom = require('phantomjs');
+        phantom = require('phantomjs-prebuilt');
         cmd = phantom.path;
       } catch (e) {
         try {
